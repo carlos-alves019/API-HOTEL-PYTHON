@@ -8,8 +8,6 @@ class HotelModel(bd.Model):
     diaria = bd.Column(bd.Float(precision=2))
     cidade = bd.Column(bd.String(80))
 
-
-
     def __init__(self,hotel_id,nome,estrelas,diaria,cidade):
         self.hotel_id = hotel_id
         self.nome = nome
@@ -28,12 +26,28 @@ class HotelModel(bd.Model):
     @classmethod
     def find_hotel(cls, hotel_id):
         hotel = cls.query.filter_by(hotel_id = hotel_id).first()
-        # SELECT * FROM hoteis WHERE hotel_id = hotel_id LIMIT 1
+        
         if hotel:
             return hotel
         return None
 
-        def save_hotel(self):
-            bd.session.add(self)
-            bd.session.commit()
+    def save_hotel(self):
+        bd.session.add(self)
+        bd.session.commit()
 
+    def update_hotel(self):
+        bd.session.add(self)
+        bd.session.commit()
+
+
+    def update_hotel(self,nome_atualizado,estrelas_atualizadas,diaria_atualizada,cidade_atualizada):
+        self.nome = nome_atualizado
+        self.estrelas = estrelas_atualizadas
+        self.diaria = diaria_atualizada
+        self.cidade = cidade_atualizada
+
+    def delete_hotel(self):
+        bd.session.delete(self)
+        bd.session.commit()
+
+            
