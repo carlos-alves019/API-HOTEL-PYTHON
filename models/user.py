@@ -2,7 +2,7 @@ from con_sql_alchemy import bd
 
 class UserModel(bd.Model):
     __tablename__ = "utilizadores"
-    user_id = bd.Column(bd.String, primary_key=True)
+    user_id = bd.Column(bd.Integer, primary_key=True, autoincrement=True)
     username = bd.Column(bd.String(40))
     password = bd.Column(bd.String(40))
 
@@ -13,8 +13,9 @@ class UserModel(bd.Model):
     def json(self):
         return {
             "user_id": self.user_id,
-            "username": self.username
-        }
+            "username": self.username,
+            "password": self.password        
+            }
     @classmethod
     def find_user(cls, username):
         user = cls.query.filter_by(username = username).first()
