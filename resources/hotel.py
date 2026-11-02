@@ -2,8 +2,18 @@ from flask_restful import Resource, reqparse
 from models.hotel import HotelModel
 from flask_jwt_extended import jwt_required
 class Hoteis(Resource):
+    parametros = reqparse.RequestParser() # selecionar dados passados na URL
+    parametros.add_argument('cidade', type=str, default="", location='args') # Adiciona o argumento cidade à lista de parâmetros aceitos na URL
+    parametros.add_argument('estrelas_min', type=float, default=0, location='args')
+    parametros.add_argument('estrelas_max', type=float, default=0, location='args')
+    parametros.add_argument('diaria_min', type=float, default=0, location='args')
+    parametros.add_argument('diaria_max', type=float, default=0, location='args')
+    parametros.add_argument('itens', type=int, default=5, location='args')
+    parametros.add_argument('pagina', type=int, default=1, location='args')
+    
     def get(self):
-        return {'hoteis': [hotel.json() for hotel in HotelModel.query.all()]}
+       meus_filtros = hoteis.parametros.parse_args() # Pega os parâmetros passados na URL e armazena na variável meus_filtros
+       query = HotelModel.query # pesquisar por ... na tabela que HotelModel representa
 
 class Hotel(Resource):
     argumentos = reqparse.RequestParser()

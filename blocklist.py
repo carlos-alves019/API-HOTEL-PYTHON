@@ -1,0 +1,2 @@
+BLOCKLIST = set() # Cria um conjunto vazio para armazenar os tokens revogados
+# set não permite elementos duplicados, ou seja, se eu tentar adicionar um elemento que já existe, ele não será adicionado.
